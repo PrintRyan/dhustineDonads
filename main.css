@@ -1,0 +1,287 @@
+body {
+    background-color: #FFDEF3;
+    overflow: hidden;
+}
+.body1 {
+
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFDEF3;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.creator {
+    position: absolute;
+    bottom: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+.gift-cap {
+    width: 210px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+
+    animation-name: giftCapAnim;
+    animation-duration: 1s;
+    animation-play-state: running;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+
+}
+@keyframes openCap {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(90deg) translateY(-120px) translateX(-80px);
+    }
+}
+@keyframes giftCapAnim {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: rotate(0) translateY(-50px)
+    }
+    90% {
+        transform: rotate(10deg) translateY(-50px);
+    }
+    100% {
+        transform: rotate(-10deg) translateY(-50px);
+    }
+}
+
+.gift-head {
+    width: 210px;
+    height: 50px;
+    background-color: #5494F4;
+    position: absolute;
+    z-index: -1;
+
+
+
+}
+.gift-body {
+    width: 200px;
+    height: 180px;
+    background-color: #5494F4;
+    
+    display:  flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+.gift-wrap-body, .gift-wrap-head {
+    width: 50px;
+    top: 0;
+    bottom: 0;
+    background-color: #F7ADB1;
+}
+
+.shadow-head {
+    background-color: rgba(0, 0, 0, 0.295);
+    width: 200px;
+    height: 10px;
+    position: absolute;
+}
+
+.open-button {
+    font-size: 30px;
+    padding: 10px 80px 10px 80px;
+    margin-top: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #FF9CC5;
+    color: white;
+    font-weight: bold;
+    box-shadow: 5px 5px 1px rgba(0, 0, 0, 0.104);
+
+    cursor: pointer;
+
+    transition: background-color 0.15s,
+    padding 0.15s;
+}
+
+.open-button:hover {
+    background-color: #ffb7d5;
+    padding: 20px 100px 20px 100px;
+}
+
+.gift-wrap1 {
+    background-color: #ff767f;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: -50px;
+
+    border-radius: 50px;
+    margin-right: 60px;
+
+    z-index: -2;
+}
+
+.gift-wrap2 {
+    background-color: #ff767f;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: -50px;
+
+    border-radius: 50px;
+
+    z-index: -2;
+    margin-left: 60px
+}
+
+.heart {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.heart::before {
+    content: "";
+    background-color: #f57494;
+    width: 25px;
+    height: 40px;
+    position: absolute;
+
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+
+    transform: rotate(-45deg);
+    left: 32.5px;
+}
+
+.heart::after {
+    content: "";
+    background-color: #f57494;
+    width: 25px;
+    height: 40px;
+    position: absolute;
+
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+
+    transform: rotate(45deg);
+    right: 31px;
+}
+
+.paper {
+    width: 180px;
+    height: 180px;
+    background-color: white;
+    position: absolute;
+    border: black solid 1px;
+    z-index: 0;
+    display: none;
+    justify-content: center;
+}
+
+.image-love {
+    display: none;
+}
+
+.Yes, .No {
+    padding: 10px 30px 10px 30px;
+    margin: 40px;
+    transition: background-color 0.15s,
+    padding 0.15s;
+    cursor: pointer;
+
+    display: none;
+}
+
+.Yes {
+    font-size: 30px;
+    background-color: rgb(39, 170, 39);
+    color: white;
+    border: none;
+    transition: background-color 0.15s,
+    padding 0.15s;
+    cursor: pointer;
+}
+
+.Yes:hover {
+    background-color: rgb(52, 213, 52);
+    padding: 20px 40px 20px 40px;
+}
+
+.No {
+    background-color: rgb(255, 35, 105);
+    color: white;
+    border: none;
+    font-size: 32px;
+}
+
+.No:hover {
+    background-color:  rgb(255, 70, 128);
+    padding: 20px 40px 20px 40px;
+}
+
+.message {
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: 34px;
+   text-align: center;
+   margin-top: -180px;
+
+   display: none;
+}
+
+.paper-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -800px;
+}
+
+.label {
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+
+    animation-name: notif;
+    animation-duration: 0.5s;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes notif {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+.tell {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+

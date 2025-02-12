@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content=
+        "width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css">
+    <title>Wow</title>
+</head>
+<body>
+    <div class="body1">
+        <!--<div class="heart"></div>-->
+        <p  class="creator">DhustineDonado, @ryanElprimo</p>
+        <div class="heart-div"></div>
+        <div class="paper">
+            <div class="paper-grid">
+                <img class="image-love" src="tenor.gif">
+                <p class="message">Will you be my Valentines?</p>
+                <div class="button-div">
+                    <button class="Yes" onclick="location.href='yey.html'">YES</button>
+                    <button class="No" onclick="
+                        sayNo();
+                    ">NO</button>
+                </div>
+            </div>
+        </div>
+        <div class="gift-cap">
+            <div class="gift-head"></div>
+            <div class="gift-wrap-head"></div>
+            <div class="gift-wrap1"></div>
+            <div class="gift-wrap2"></div>
+        </div>
+        <div class="gift-body">
+            <div class="shadow-head"></div>
+            <div class="gift-wrap-body"></div>
+        </div>
+        <button class="open-button" id="open-button"
+        onclick="
+            openGift();
+        ">OPEN</button>
+        <p class="label">Open the Gift!</p>
+        <p class="tell">play it to add more romantic feeling!</p>
+    </div>
+    <audio controls autoplay class="themeBg">
+        <source src="yung kai - blue (Lyrics) [ ezmp3.cc ].mp3" type="audio/mpeg">
+    </audio>
+
+
+    <script>
+        let redButton = ["are you sure?", "Really sure?", "Pookie Please...", "think about it", "if you say no I will be sad",
+            "I will be very sad", "I will be very very sad..."
+        ]
+        let redIndex = 0;
+        const giftCap = document.querySelector(".gift-cap");
+        let openButton = document.getElementById("open-button");
+        let playCap = true;
+        let open = false;
+        //let heartPos = 0;
+        function playCapAnim() {
+            if (playCap) {
+                giftCap.style.animationDirection = 'alternate';
+                giftCap.style.animation = 'giftCapAnim 1s';
+                giftCap.style.animationDirection = 'alternate';
+                giftCap.style.animationIterationCount = '2';
+            };
+        };
+
+        function resetAnim() {
+            if (playCap) {
+                giftCap.style.animation = 'none';
+            };
+        };
+
+        function openGift() {
+            giftCap.style.animation = 'openCap 1s';
+            giftCap.style.animationFillMode = 'forwards'; 
+            playCap = false;
+            open = true;
+            window.setTimeout(showGift, 5000);
+        }
+
+        openButton.addEventListener("mouseover", playCapAnim);
+        openButton.addEventListener("mouseout", resetAnim);
+
+        window.onload = document.querySelector(".themeBg").autoplay
+
+        function addHearts() {
+            if (open) {
+                let heartIndex = document.querySelector(".heart-div").childElementCount;
+                let hearts = document.createElement("div");
+                hearts.id = "heart" + heartIndex; 
+                hearts.classList.add("heart");
+                let gift = document.querySelector(".gift-body");
+                let startPos = Math.floor(Math.random() * (((gift.offsetWidth + gift.offsetLeft)-100) - gift.offsetLeft + 1) ) + gift.offsetLeft;
+                document.querySelector(".heart-div").appendChild(hearts);
+                document.getElementById(hearts.id).style.left = startPos + "px";
+            };
+        }
+
+        function moveHeart() {
+            let parent = document.querySelector(".heart-div");
+            for (let i = 0; i < parent.childElementCount; i++) {
+                let pos = document.getElementById("heart" + i).offsetTop - 10;
+                document.getElementById("heart" + i).style.top = pos + "px";
+                };
+            /*let heartPos = document.querySelector(".heart").offsetTop - 10;
+            let heart = document.querySelector(".heart");
+            heart.style.top = heartPos + "px";*/
+        }
+
+        function showGift() {
+            open = false;
+            document.querySelector(".paper").style.display = "block";
+            window.setInterval(movePaper, 100);
+        };
+
+        function movePaper() {
+
+            let paper = document.querySelector(".paper");
+            if (paper.offsetTop > document.querySelector(".gift-body").offsetTop - 180) {
+                let pos = paper.offsetTop - 10;
+                paper.style.top = pos + "px";
+            } else {
+                window.setInterval(zoomPaper, 100);
+            };
+
+        };
+
+        function zoomPaper() {
+            let imageLove = document.querySelector(".image-love");
+            let letterLove = document.querySelector(".message");
+            let yesLove = document.querySelector(".Yes");
+            let noLove = document.querySelector(".No");
+
+            let paper = document.querySelector(".paper");
+            if (paper.offsetWidth < 1000) {
+                paper.style.zIndex = 200;
+                paper.style.width = (paper.offsetWidth + 10) + "px";
+                paper.style.height = (paper.offsetWidth + 10) + "px";
+                paper.style.top = (paper.offsetTop - 1) + "px";
+                paper.style.display = "flex";
+            } else{
+                imageLove.style.display = "block";
+                letterLove.style.display = "block";
+                noLove.style.display = "inline-block";
+                yesLove.style.display = "inline-block";
+                let mainBody = document.querySelector(".body1");
+                for (let i = 0; i <= mainBody.childElementCount; i++) {
+                    if (mainBody.childNodes[i].className != "paper") {
+                        mainBody.removeChild(mainBody.childNodes[i]);
+                    };
+                };
+            }
+        };
+
+        function sayNo() {
+            let yes = document.querySelector(".Yes");
+            let compStyle = parseFloat(window.getComputedStyle(yes).fontSize);
+            let compStyle2 = parseFloat(window.getComputedStyle(document.querySelector(".No")).fontSize);
+            redIndex ++;
+            document.querySelector(".Yes").style.fontSize = `${compStyle + 8}px`;
+            document.querySelector(".No").style.fontSize = `${compStyle2 - 3}px`
+            if (redIndex > redButton.length) {
+                document.querySelector(".Yes").style.fontSize = `${1000}px`;
+            };
+            document.querySelector(".No").innerHTML = redButton[redIndex - 1];
+        }
+
+        window.setInterval(moveHeart,100);
+        window.setInterval(addHearts, 500);
+    </script>
+</body>
